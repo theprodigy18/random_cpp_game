@@ -1,0 +1,41 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Win32-Build",
+            "type": "shell",
+            "command": "sh build.sh",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Linux-Build",
+            "type": "shell",
+            "command": "bash build.sh",
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        },
+        {
+            // This task runs heaptrack for memory profiling.
+            // Because i can't run heaptrack on launch, 
+            // so i run it in a separate task. You can use this tasks if you have heaptrack installed.
+            "label": "Run Linux with Heaptrack",
+            "type": "shell",
+            "command": "heaptrack",
+            "args": [
+                "--output",
+                "${workspaceFolder}/build/linux-Debug/heaptrack.game",
+                "${workspaceFolder}/build/linux-Debug/game"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "test",
+                "isDefault": false
+            }
+        }
+    ]
+}
